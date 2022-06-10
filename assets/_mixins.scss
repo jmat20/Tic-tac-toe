@@ -1,0 +1,21 @@
+@mixin background(
+  $imgpath,
+  $repeat: no-repeat,
+  $size: cover,
+  $position: center,
+  $attachment: fixed
+) {
+  background: {
+    image: $imgpath;
+    repeat: $repeat;
+    size: $size;
+    position: $position;
+    attachment: $attachment;
+  }
+}
+
+@mixin flex($flex: flex, $x: center, $y: center) {
+  display: $flex;
+  justify-content: $x;
+  align-items: $y;
+}
