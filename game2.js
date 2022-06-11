@@ -5,7 +5,11 @@ let boardState = [
   ["", "", ""],
 ];
 
-let boardHistory = [];
+let boardHistory = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+];
 let board = document.querySelector(".activeBoard");
 
 let flag = true;
@@ -14,15 +18,37 @@ let p1Score = 0,
   p2Score = 0;
 let p1Name, p2Name, a, b;
 let moveCounter = 0;
+let initializer = document.querySelector(".complete");
+
+let funct = () => {
+  setInterval(getNames, 1000);
+};
+
+let getNames = () => {
+  p1Name = window.localStorage.getItem("p1Name");
+  p2Name = window.localStorage.getItem("p2Name");
+  document.querySelector("#p1Name").innerText = p1Name;
+
+  document.querySelector("#p2Name").innerText = p2Name;
+
+  getScores();
+};
+
+let getScores = () => {
+  document.querySelector("#p1Score").innerText = p1Score;
+  document.querySelector("#p2Score").innerText = p2Score;
+};
 
 //Win Conditions
 let winner = (player) => {
   if (player === "x") {
-    window.alert("x wins");
+    window.alert(`${p1Name} wins`);
     p1Score++;
+    getScores();
   } else {
-    window.alert("o wins");
+    window.alert(`${p2Name} wins`);
     p2Score++;
+    getScores();
   }
 };
 
@@ -59,18 +85,19 @@ let winnerCheck = (player) => {
     winner(player);
     done = true;
     return;
-  }
-
-  if (
-    boardState.every(
-      (checkitem = (cell) => {
-        cell !== "";
-      })
-    ) === true
+  } else if (
+    c1 !== "" &&
+    c2 !== "" &&
+    c3 !== "" &&
+    c4 !== "" &&
+    c5 !== "" &&
+    c6 !== "" &&
+    c7 !== "" &&
+    c8 !== "" &&
+    c9 !== ""
   ) {
     window.alert("Draw");
     done = true;
-    return;
   }
 };
 //
@@ -151,3 +178,5 @@ document.querySelector(".reset").addEventListener("click", function () {
   reset();
   console.log("click");
 });
+
+funct();

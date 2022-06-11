@@ -1,0 +1,116 @@
+.nameInput {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "welcome welcome"
+    "p1 p2"
+    "start start";
+  place-items: center;
+  gap: min(1vh, 1vw);
+  transition: all 0.2s ease-in-out;
+
+  .welcome {
+    margin: 0.5rem;
+    grid-area: welcome;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      border: 1px solid black;
+      border-radius: 13px;
+      height: 40%;
+      width: 40%;
+      margin-bottom: 0.3rem;
+      background-color: rgba($color: lightgray, $alpha: 0.4);
+    }
+  }
+
+  .input {
+    height: 25vh;
+    width: 45vw;
+    max-width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 0.3rem solid black;
+    border-radius: 0.3rem;
+    background-color: rgba($color: lightgray, $alpha: 0.4);
+    transition: all 0.2s ease-in-out;
+
+    img {
+      height: min(8vh, 8vw);
+      width: min(8vh, 8vw);
+      margin-bottom: min(4vh, 4vw);
+    }
+  }
+
+  .input:hover,
+  .input:focus {
+    transform: scale(1.1);
+  }
+
+  .p1 {
+    grid-area: p1;
+
+    #p1Input {
+      width: 75%;
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+      font-size: 1.25rem;
+      text-align: center;
+      background: none;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      color: black;
+    }
+    #p1Input:focus {
+      outline: none;
+      background: none;
+    }
+  }
+
+  .p2 {
+    grid-area: p2;
+
+    #p2Input {
+      width: 75%;
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+      font-size: 1.25rem;
+      text-align: center;
+      background: none;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      color: black;
+    }
+
+    #p2Input:focus {
+      outline: none;
+      background: none;
+    }
+  }
+
+  .complete {
+    font-size: 1.5rem;
+    grid-area: start;
+    padding: 0.3rem;
+    border: 0.3rem solid black;
+    border-radius: 0.3rem;
+    transition: all 0.2s ease-in-out;
+    background-color: rgba($color: lightgray, $alpha: 0.4);
+  }
+
+  .complete:hover {
+    transform: scale(1.2);
+    background: rgb(0, 0, 0);
+    color: white;
+  }
+}
