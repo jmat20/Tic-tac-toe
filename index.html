@@ -7,6 +7,10 @@
     <title>Tic-tac-toe</title>
     <script type="text/javascript" src="./game2.js" defer></script>
     <script type="text/javascript" src="./welcome.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/a111f652a1.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./assets/styles.css" />
   </head>
   <body>
@@ -33,17 +37,20 @@
           autocomplete="off"
         />
       </div>
-      <div class="complete">GAME START</div>
+      <div class="button" data-game-start>GAME START</div>
     </div>
     <div class="gameWrapper hidden">
-      <div class="p1 status">
+      <div class="winnerBox hidden">
+        <div class="button" data-dismiss>DISMISS</div>
+      </div>
+      <div class="p1 status active" data-p1-status>
         <img src="./assets/images/x.png" />
         <div class="playerInfo">
           <span class="Name" id="p1Name"></span>
           <span class="Score" id="p1Score"></span>
         </div>
       </div>
-      <div class="p2 status">
+      <div class="p2 status" data-p2-status>
         <img src="./assets/images/o.png" />
         <div class="playerInfo">
           <span class="Name" id="p2Name"></span>
@@ -51,9 +58,16 @@
         </div>
       </div>
       <div class="activeBoard"></div>
-      <div class="otherControls">
-        <div class="reset">Reset Board</div>
-        <div class="clearScore"></div>
+      <div class="reset button">Reset Board</div>
+      <div class="clearScore button">Reset Score</div>
+      <div class="prev disabled"><i class="fa-solid fa-angles-left"></i></div>
+      <div class="next disabled"><i class="fa-solid fa-angles-right"></i></div>
+      <div class="home"><i class="fa-solid fa-house"></i></div>
+      <div class="moveHistory min">
+        <div class="historyTitle">
+          <span>MOVE HISTORY</span>
+          <i class="fa-solid fa-window-minimize" id="historyMin"></i>
+        </div>
       </div>
     </div>
   </body>

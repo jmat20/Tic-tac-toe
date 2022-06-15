@@ -11,25 +11,37 @@ let boardHistory = [
   ["", "", ""],
 ];
 let board = document.querySelector(".activeBoard");
-
+let p1Status = document.querySelector("[data-p1-status]");
+let p2Status = document.querySelector("[data-p2-status]");
+let winnerDisp = document.querySelector(".winnerBox");
+let dispDismiss = document.querySelector("[data-dismiss]");
 let flag = true;
 let done = false;
 let p1Score = 0,
   p2Score = 0;
-let p1Name, p2Name, a, b;
-let moveCounter = 0;
+let p1Name, p2Name, a, b, moveString;
+let moveCounter = 0,
+  dispMove = 0;
 let initializer = document.querySelector(".complete");
+let winnerText = document.createElement("div");
+let list = document.createElement("ul");
+let prevButton = document.querySelector(".prev");
+let nextButton = document.querySelector(".next");
 
 let funct = () => {
   setInterval(getNames, 1000);
 };
 
+let dismiss = () => {
+  winnerDisp.classList.toggle("hidden");
+};
+
 let getNames = () => {
   p1Name = window.localStorage.getItem("p1Name");
   p2Name = window.localStorage.getItem("p2Name");
-  document.querySelector("#p1Name").innerText = p1Name;
+  document.querySelector("#p1Name").innerText = `${p1Name}:`;
 
-  document.querySelector("#p2Name").innerText = p2Name;
+  document.querySelector("#p2Name").innerText = `${p2Name}:`;
 
   getScores();
 };
@@ -42,13 +54,21 @@ let getScores = () => {
 //Win Conditions
 let winner = (player) => {
   if (player === "x") {
-    window.alert(`${p1Name} wins`);
+    winnerText.innerText = `${p1Name} wins`;
+    winnerDisp.prepend(winnerText);
+    winnerDisp.classList.toggle("hidden");
+    dispMove = moveCounter;
     p1Score++;
     getScores();
+    enablestates();
   } else {
-    window.alert(`${p2Name} wins`);
+    winnerText.innerText = `${p2Name} wins`;
+    winnerDisp.prepend(winnerText);
+    winnerDisp.classList.toggle("hidden");
+    dispMove = moveCounter;
     p2Score++;
     getScores();
+    enablestates();
   }
 };
 
@@ -96,8 +116,11 @@ let winnerCheck = (player) => {
     c8 !== "" &&
     c9 !== ""
   ) {
-    window.alert("Draw");
+    winnerText.innerText = `It's a draw`;
+    winnerDisp.prepend(winnerText);
+    winnerDisp.classList.toggle("hidden");
     done = true;
+    dispMove = moveCounter;
   }
 };
 //
@@ -111,22 +134,127 @@ let turn = (cell, id) => {
       boardState[a][b] = "x";
       flag = !flag;
       moveCounter++;
-      boardHistory[boardHistory.length] = boardState;
+      storeHistory(boardState);
       console.log(boardHistory);
+      moveList(flag, id, moveCounter);
+      p1Status.classList.toggle("active");
+      p2Status.classList.toggle("active");
       boardUpdate();
       winnerCheck("x");
     } else {
       boardState[a][b] = "o";
       flag = !flag;
       moveCounter++;
-      boardHistory[boardHistory.length] = boardState;
+      storeHistory(boardState);
       console.log(boardHistory);
+      moveList(flag, id, moveCounter);
+      p1Status.classList.toggle("active");
+      p2Status.classList.toggle("active");
       boardUpdate();
       winnerCheck("o");
     }
   } else {
     return;
   }
+};
+
+//board history
+let storeHistory = (state) => {
+  let stringMove = JSON.stringify(state);
+  let arrMove = JSON.parse(stringMove);
+  boardHistory[moveCounter - 1] = arrMove;
+};
+
+let toStringMove = (id) => {
+  if (id === "0,0") {
+    moveString = "top left";
+    return moveString;
+  }
+  if (id === "0,1") {
+    moveString = "top center";
+    return moveString;
+  }
+  if (id === "0,2") {
+    moveString = "top right";
+    return moveString;
+  }
+  if (id === "1,0") {
+    moveString = "mid left";
+    return moveString;
+  }
+  if (id === "1,1") {
+    moveString = "center";
+    return moveString;
+  }
+  if (id === "1,2") {
+    moveString = "mid right";
+    return moveString;
+  }
+  if (id === "2,0") {
+    moveString = "bottom left";
+    return moveString;
+  }
+  if (id === "2,1") {
+    moveString = "bottom center";
+    return moveString;
+  }
+  if (id === "2,2") {
+    moveString = "bottom right";
+    return moveString;
+  }
+};
+
+let moveList = (flag, id, moveCounter) => {
+  let historyWrapper = document.querySelector(".moveHistory");
+  let move = document.createElement("li");
+  player = flag ? p1Name : p2Name;
+  toStringMove(id);
+  move.innerText = `${moveCounter}: ${player} to ${moveString}`;
+  list.appendChild(move);
+  historyWrapper.appendChild(list);
+};
+
+let showHideHistory = () => {
+  let history = document.querySelector(".moveHistory");
+  history.classList.toggle("min");
+};
+
+let prevState = () => {
+  if (done === false) {
+    return;
+  }
+  if (dispMove <= 1) {
+    return;
+  }
+  dispMove--;
+  let stringBoard = JSON.stringify(boardHistory[dispMove - 1]);
+  let arrBoard = JSON.parse(stringBoard);
+  boardState = arrBoard;
+  boardUpdate();
+  if (dispMove <= 1) {
+    prevButton.classList.toggle("disabled");
+  }
+};
+
+let nextState = () => {
+  if (done === false) {
+    return;
+  }
+  if (dispMove === boardHistory.length || dispMove === 0) {
+    return;
+  }
+  dispMove++;
+  let stringBoard = JSON.stringify(boardHistory[dispMove - 1]);
+  let arrBoard = JSON.parse(stringBoard);
+  boardState = arrBoard;
+  boardUpdate();
+  if (dispMove === boardHistory.length) {
+    nextButton.classList.toggle("disabled");
+  }
+};
+
+let enablestates = () => {
+  prevButton.classList.toggle("disabled");
 };
 
 //board manipulation
@@ -136,6 +264,28 @@ let reset = () => {
     ["", "", ""],
     ["", "", ""],
   ];
+  done = false;
+  boardUpdate();
+  list.innerHTML = "";
+  dispMove = 0;
+  moveCounter = 0;
+  boardHistory = [];
+};
+
+let resetAll = () => {
+  boardState = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  boardHistory = [];
+  window.localStorage.clear();
+  startScreen.classList.toggle("hidden");
+  gameScreen.classList.toggle("hidden");
+  p1Score = 0;
+  p2Score = 0;
+  dispMove = 0;
+  moveCounter = 0;
   done = false;
   boardUpdate();
 };
@@ -178,5 +328,19 @@ document.querySelector(".reset").addEventListener("click", function () {
   reset();
   console.log("click");
 });
+
+document.querySelector(".home").addEventListener("click", function () {
+  resetAll();
+});
+
+document
+  .querySelector("#historyMin")
+  .addEventListener("click", showHideHistory);
+
+dispDismiss.addEventListener("click", dismiss);
+
+prevButton.addEventListener("click", prevState);
+
+nextButton.addEventListener("click", nextState);
 
 funct();

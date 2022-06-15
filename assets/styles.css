@@ -107,7 +107,8 @@ body {
   outline: none;
   background: none;
 }
-.nameInput .complete {
+
+.button {
   font-size: 1.5rem;
   grid-area: start;
   padding: 0.3rem;
@@ -116,7 +117,8 @@ body {
   transition: all 0.2s ease-in-out;
   background-color: rgba(211, 211, 211, 0.4);
 }
-.nameInput .complete:hover {
+
+.button:hover {
   transform: scale(1.2);
   background: rgb(0, 0, 0);
   color: white;
@@ -126,22 +128,22 @@ body {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 25% 50% 5% 5% 15%;
+  grid-template-rows: 25% 50% 7% 5% 12%;
   grid-template-columns: 25% 25% 25% 25%;
-  grid-template-areas: "p1 p1 p2 p2" "board board board board" ". reset reset ." ". prev next ." "home . . history";
+  grid-template-areas: "p1 p1 p2 p2" "board board board board" ". reset clear ." ". prev next ." "home . . history";
   place-items: center;
-  margin: min(2vh, 2vw);
+  padding: min(2vh, 2vw);
 }
 
 .status {
-  height: 25vh;
-  width: 45vw;
+  height: 20vh;
+  width: 40vw;
   max-width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: min(2vh, 2vw);
+  padding: min(2vh, 2vw);
   border: 0.3rem solid black;
   border-radius: 0.3rem;
   background-color: rgba(211, 211, 211, 0.4);
@@ -159,6 +161,10 @@ body {
 
 .p2 {
   grid-area: p2;
+}
+
+.active {
+  transform: scale(1.1);
 }
 
 .reset {
@@ -205,6 +211,104 @@ body {
   background-repeat: no-repeat;
 }
 
+.reset {
+  grid-area: reset;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.clearScore {
+  grid-area: clear;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.prev {
+  grid-area: prev;
+  font-size: 1.5rem;
+}
+
+.next {
+  grid-area: next;
+  font-size: 1.5rem;
+}
+
+.home {
+  grid-area: home;
+  justify-self: start;
+  align-self: end;
+  font-size: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.home:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.moveHistory {
+  grid-area: history;
+  font-size: 0.75rem;
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: rgba(211, 211, 211, 0.4);
+  border: 0.1rem solid black;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+}
+.moveHistory .historyTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(211, 211, 211, 0.8);
+}
+.moveHistory ul {
+  max-height: 80%;
+  overflow: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.min {
+  height: 1.2rem;
+  justify-self: end;
+  align-self: end;
+  overflow: hidden;
+}
+
+.winnerBox {
+  font-size: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 45vh;
+  width: 60vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: min(2vh, 2vw);
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba(211, 211, 211, 0.9);
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+}
+
 .hidden {
   display: none;
+}
+
+.disabled {
+  opacity: 0.2;
 }/*# sourceMappingURL=styles.css.map */

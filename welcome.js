@@ -1,13 +1,21 @@
 let p1 = "Player 1";
 let p2 = "Player 2";
 
-let gameStartButton = document.querySelector(".complete");
+let gameStartButton = document.querySelector("[data-game-start]");
 let startScreen = document.querySelector(".nameInput");
 let gameScreen = document.querySelector(".gameWrapper");
 
 let gameInitialize = () => {
-  p1 = document.querySelector("#p1Input").value;
-  p2 = document.querySelector("#p2Input").value;
+  if (document.querySelector("#p1Input").value === "") {
+    p1 = "Player 1";
+  } else {
+    p1 = document.querySelector("#p1Input").value;
+  }
+  if (document.querySelector("#p2Input").value === "") {
+    p2 = "Player 2";
+  } else {
+    p2 = document.querySelector("#p2Input").value;
+  }
   if (
     window.localStorage.getItem("p1Name") === null ||
     window.localStorage.getItem("p1Name") === ""
