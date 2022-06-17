@@ -1,0 +1,194 @@
+.gameWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 25% 50% 7% 5% 12%;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-areas:
+    "p1 p1 p2 p2"
+    "board board board board"
+    ". reset clear ."
+    ". prev next ."
+    "home . . history";
+  place-items: center;
+  padding: min(2vh, 2vw);
+
+  .prev,
+  .next {
+    background-color: rgba($color: lightgray, $alpha: 0);
+    border: none;
+  }
+}
+
+.status {
+  height: 20vh;
+  width: 40vw;
+  max-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: min(2vh, 2vw);
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba($color: lightgray, $alpha: 0.4);
+  transition: all 0.2s ease-in-out;
+
+  img {
+    height: min(8vh, 8vw);
+    width: min(8vh, 8vw);
+    margin-bottom: min(4vh, 4vw);
+  }
+}
+
+.p1 {
+  grid-area: p1;
+}
+
+.p2 {
+  grid-area: p2;
+}
+
+.active {
+  transform: scale(1.1);
+}
+
+.reset {
+  grid-area: reset;
+}
+
+.activeBoard {
+  grid-area: board;
+  width: 270px;
+  height: 270px;
+  max-width: min(50vh, 50vw);
+  max-height: min(50vh, 50vw);
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  background-color: lightgray;
+  gap: 5px;
+}
+
+.box {
+  background-color: white;
+  border: 2.5px solid black;
+  border-radius: 4px;
+  color: transparent;
+}
+
+.box:hover {
+  border: 2.5px solid gold;
+}
+
+.cross {
+  background-image: url("./images/x.png");
+  background-size: cover;
+  background-position: center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+}
+
+.circle {
+  background-image: url("./images/o.png");
+  background-size: cover;
+  background-position: center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+}
+
+.reset {
+  grid-area: reset;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.clearScore {
+  grid-area: clear;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.prev {
+  grid-area: prev;
+  font-size: 1.5rem;
+}
+
+.next {
+  grid-area: next;
+  font-size: 1.5rem;
+}
+
+.home {
+  grid-area: home;
+  justify-self: start;
+  align-self: end;
+  font-size: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.home:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.moveHistory {
+  grid-area: history;
+  font-size: 0.75rem;
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: rgba($color: lightgray, $alpha: 0.4);
+  border: 0.1rem solid black;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+
+  .historyTitle {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba($color: lightgray, $alpha: 0.8);
+  }
+
+  ul {
+    max-height: 80%;
+    overflow: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.min {
+  height: 1.2rem;
+  justify-self: end;
+  align-self: end;
+  overflow: hidden;
+}
+
+.winnerBox {
+  font-size: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 45vh;
+  width: 60vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: min(2vh, 2vw);
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba($color: lightgray, $alpha: 0.9);
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+}

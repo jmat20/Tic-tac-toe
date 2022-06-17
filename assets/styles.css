@@ -15,16 +15,149 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgb(66, 182, 221);
+  background: linear-gradient(325deg, rgba(66, 182, 221, 0.9710259104) 0%, rgb(255, 255, 255) 50%, rgba(190, 69, 252, 0.9710259104) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nameInput {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: "welcome welcome" "p1 p2" "start start";
+  place-items: center;
+  gap: min(1vh, 1vw);
+  transition: all 0.2s ease-in-out;
+}
+.nameInput .welcome {
+  margin: 0.5rem;
+  grid-area: welcome;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.nameInput .welcome img {
+  border: 1px solid black;
+  border-radius: 13px;
+  height: 40%;
+  width: 40%;
+  margin-bottom: 0.3rem;
+  background-color: rgba(211, 211, 211, 0.4);
+}
+.nameInput .input {
+  height: 25vh;
+  width: 45vw;
+  max-width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba(211, 211, 211, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+.nameInput .input img {
+  height: min(8vh, 8vw);
+  width: min(8vh, 8vw);
+  margin-bottom: min(4vh, 4vw);
+}
+.nameInput .input:hover,
+.nameInput .input:focus {
+  transform: scale(1.1);
+}
+.nameInput .p1 {
+  grid-area: p1;
+}
+.nameInput .p1 #p1Input {
+  width: 75%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  font-size: 1.25rem;
+  text-align: center;
+  background: none;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: black;
+}
+.nameInput .p1 #p1Input:focus {
+  outline: none;
+  background: none;
+}
+.nameInput .p2 {
+  grid-area: p2;
+}
+.nameInput .p2 #p2Input {
+  width: 75%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  font-size: 1.25rem;
+  text-align: center;
+  background: none;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: black;
+}
+.nameInput .p2 #p2Input:focus {
+  outline: none;
+  background: none;
+}
+
+.button {
+  font-size: 1.5rem;
+  grid-area: start;
+  padding: 0.3rem;
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(211, 211, 211, 0.4);
+}
+
+.button:hover {
+  transform: scale(1.2);
+  background: rgb(0, 0, 0);
+  color: white;
 }
 
 .gameWrapper {
-  width: min(100vh, 100vw);
-  height: min(100vh, 100vw);
+  width: 100vw;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 25% 50% 5% 5% 15%;
+  grid-template-rows: 25% 50% 7% 5% 12%;
   grid-template-columns: 25% 25% 25% 25%;
-  grid-template-areas: "p1 p1 p2 p2" "board board board board" ". reset reset ." ". prev next ." ". . . history";
+  grid-template-areas: "p1 p1 p2 p2" "board board board board" ". reset clear ." ". prev next ." "home . . history";
   place-items: center;
+  padding: min(2vh, 2vw);
+}
+.gameWrapper .prev,
+.gameWrapper .next {
+  background-color: rgba(211, 211, 211, 0);
+  border: none;
+}
+
+.status {
+  height: 20vh;
+  width: 40vw;
+  max-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: min(2vh, 2vw);
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba(211, 211, 211, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+.status img {
+  height: min(8vh, 8vw);
+  width: min(8vh, 8vw);
+  margin-bottom: min(4vh, 4vw);
 }
 
 .p1 {
@@ -33,6 +166,10 @@ body {
 
 .p2 {
   grid-area: p2;
+}
+
+.active {
+  transform: scale(1.1);
 }
 
 .reset {
@@ -56,6 +193,7 @@ body {
   background-color: white;
   border: 2.5px solid black;
   border-radius: 4px;
+  color: transparent;
 }
 
 .box:hover {
@@ -65,9 +203,117 @@ body {
 .cross {
   background-image: url("./images/x.png");
   background-size: cover;
+  background-position: center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
 }
 
 .circle {
   background-image: url("./images/o.png");
   background-size: cover;
+  background-position: center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+}
+
+.reset {
+  grid-area: reset;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.clearScore {
+  grid-area: clear;
+  justify-self: center;
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.1rem solid black;
+}
+
+.prev {
+  grid-area: prev;
+  font-size: 1.5rem;
+}
+
+.next {
+  grid-area: next;
+  font-size: 1.5rem;
+}
+
+.home {
+  grid-area: home;
+  justify-self: start;
+  align-self: end;
+  font-size: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.home:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.moveHistory {
+  grid-area: history;
+  font-size: 0.75rem;
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: rgba(211, 211, 211, 0.4);
+  border: 0.1rem solid black;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+}
+.moveHistory .historyTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(211, 211, 211, 0.8);
+}
+.moveHistory ul {
+  max-height: 80%;
+  overflow: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.min {
+  height: 1.2rem;
+  justify-self: end;
+  align-self: end;
+  overflow: hidden;
+}
+
+.winnerBox {
+  font-size: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 45vh;
+  width: 60vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: min(2vh, 2vw);
+  border: 0.3rem solid black;
+  border-radius: 0.3rem;
+  background-color: rgba(211, 211, 211, 0.9);
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  opacity: 0.2;
 }/*# sourceMappingURL=styles.css.map */

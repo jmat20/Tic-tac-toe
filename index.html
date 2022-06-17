@@ -5,31 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-tac-toe</title>
-    <script type="text/javascript" src="./game.js" defer></script>
+    <script type="text/javascript" src="./game2.js" defer></script>
+    <script type="text/javascript" src="./welcome.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/a111f652a1.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./assets/styles.css" />
   </head>
   <body>
     <div class="nameInput">
-      <div class="p1Input"></div>
-      <div class="p2Input"></div>
-    </div>
-    <div class="gameWrapper">
-      <div class="p1">X name</div>
-      <div class="p2">O name</div>
-      <div class="activeBoard">
-        <div class="box b1" id="b1"></div>
-        <div class="box b2" id="b2"></div>
-        <div class="box b3" id="b3"></div>
-        <div class="box b4" id="b4"></div>
-        <div class="box b5" id="b5"></div>
-        <div class="box b6" id="b6"></div>
-        <div class="box b7" id="b7"></div>
-        <div class="box b8" id="b8"></div>
-        <div class="box b9" id="b9"></div>
+      <div class="welcome">
+        <img src="./assets/images/icon.png" />
+        <p class="title">TIC-TAC-TOE</p>
       </div>
-      <div class="otherControls">
-        <div class="reset">Reset Board</div>
-        <div class="clearScore"></div>
+      <div class="p1 input">
+        <img src="./assets/images/x.png" />
+        <input
+          type="text"
+          id="p1Input"
+          placeholder="Player 1"
+          autocomplete="off"
+        />
+      </div>
+      <div class="p2 input">
+        <img src="./assets/images/o.png" />
+        <input
+          type="text"
+          id="p2Input"
+          placeholder="Player 2"
+          autocomplete="off"
+        />
+      </div>
+      <div class="button" data-game-start>GAME START</div>
+    </div>
+    <div class="gameWrapper hidden">
+      <div class="winnerBox hidden">
+        <div class="button" data-dismiss>DISMISS</div>
+      </div>
+      <div class="p1 status active" data-p1-status>
+        <img src="./assets/images/x.png" />
+        <div class="playerInfo">
+          <span class="Name" id="p1Name"></span>
+          <span class="Score" id="p1Score"></span>
+        </div>
+      </div>
+      <div class="p2 status" data-p2-status>
+        <img src="./assets/images/o.png" />
+        <div class="playerInfo">
+          <span class="Name" id="p2Name"></span>
+          <span class="Score" id="p2Score"></span>
+        </div>
+      </div>
+      <div class="activeBoard"></div>
+      <div class="reset button">Reset Board</div>
+      <div class="clearScore button">Reset Score</div>
+      <button type="button" class="prev">
+        <i class="fa-solid fa-angles-left"></i>
+      </button>
+      <button type="button" class="next">
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+      <div class="home"><i class="fa-solid fa-house"></i></div>
+      <div class="moveHistory min">
+        <div class="historyTitle">
+          <span>MOVE HISTORY</span>
+          <i class="fa-solid fa-window-minimize" id="historyMin"></i>
+        </div>
       </div>
     </div>
   </body>
