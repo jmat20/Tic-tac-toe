@@ -27,6 +27,7 @@ let winnerText = document.createElement("div");
 let list = document.createElement("ul");
 let prevButton = document.querySelector(".prev");
 let nextButton = document.querySelector(".next");
+let scoreResetButton = document.querySelector(".clearScore");
 
 let funct = () => {
   setInterval(getNames, 1000);
@@ -135,7 +136,6 @@ let turn = (cell, id) => {
       flag = !flag;
       moveCounter++;
       storeHistory(boardState);
-      console.log(boardHistory);
       moveList(flag, id, moveCounter);
       p1Status.classList.toggle("active");
       p2Status.classList.toggle("active");
@@ -146,7 +146,6 @@ let turn = (cell, id) => {
       flag = !flag;
       moveCounter++;
       storeHistory(boardState);
-      console.log(boardHistory);
       moveList(flag, id, moveCounter);
       p1Status.classList.toggle("active");
       p2Status.classList.toggle("active");
@@ -219,42 +218,35 @@ let showHideHistory = () => {
   history.classList.toggle("min");
 };
 
+prevButton.disabled = true;
+nextButton.disabled = true;
+
 let prevState = () => {
-  if (done === false) {
-    return;
-  }
-  if (dispMove <= 1) {
-    return;
-  }
+  nextButton.disabled = false;
   dispMove--;
   let stringBoard = JSON.stringify(boardHistory[dispMove - 1]);
   let arrBoard = JSON.parse(stringBoard);
   boardState = arrBoard;
   boardUpdate();
   if (dispMove <= 1) {
-    prevButton.classList.toggle("disabled");
+    prevButton.disabled = true;
   }
 };
 
 let nextState = () => {
-  if (done === false) {
-    return;
-  }
-  if (dispMove === boardHistory.length || dispMove === 0) {
-    return;
-  }
+  prevButton.disabled = false;
   dispMove++;
   let stringBoard = JSON.stringify(boardHistory[dispMove - 1]);
   let arrBoard = JSON.parse(stringBoard);
   boardState = arrBoard;
   boardUpdate();
   if (dispMove === boardHistory.length) {
-    nextButton.classList.toggle("disabled");
+    nextButton.disabled = true;
   }
 };
 
 let enablestates = () => {
-  prevButton.classList.toggle("disabled");
+  prevButton.disabled = false;
 };
 
 //board manipulation
@@ -270,6 +262,14 @@ let reset = () => {
   dispMove = 0;
   moveCounter = 0;
   boardHistory = [];
+  prevButton.disabled = true;
+  nextButton.disabled = true;
+};
+
+let scoreClear = () => {
+  p1Score = 0;
+  p2Score = 0;
+  getScores();
 };
 
 let resetAll = () => {
@@ -288,6 +288,8 @@ let resetAll = () => {
   moveCounter = 0;
   done = false;
   boardUpdate();
+  prevButton.disabled = true;
+  nextButton.disabled = true;
 };
 
 let boardUpdate = () => {
@@ -318,20 +320,16 @@ boardState.forEach((rows, y) => {
     columndiv.textContent = item;
     columndiv.addEventListener("click", function () {
       turn(columndiv, columndiv.id);
-      console.log("click");
     });
     board.appendChild(columndiv);
   });
 });
 
-document.querySelector(".reset").addEventListener("click", function () {
-  reset();
-  console.log("click");
-});
+document.querySelector(".reset").addEventListener("click", reset);
 
-document.querySelector(".home").addEventListener("click", function () {
-  resetAll();
-});
+document.querySelector(".home").addEventListener("click", resetAll);
+
+scoreResetButton.addEventListener("click", scoreClear);
 
 document
   .querySelector("#historyMin")

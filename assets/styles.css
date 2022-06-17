@@ -134,6 +134,11 @@ body {
   place-items: center;
   padding: min(2vh, 2vw);
 }
+.gameWrapper .prev,
+.gameWrapper .next {
+  background-color: rgba(211, 211, 211, 0);
+  border: none;
+}
 
 .status {
   height: 20vh;

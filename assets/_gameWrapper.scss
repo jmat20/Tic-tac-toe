@@ -12,6 +12,12 @@
     "home . . history";
   place-items: center;
   padding: min(2vh, 2vw);
+
+  .prev,
+  .next {
+    background-color: rgba($color: lightgray, $alpha: 0);
+    border: none;
+  }
 }
 
 .status {
